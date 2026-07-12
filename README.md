@@ -2,122 +2,120 @@
 
 > **Show up. That's the program.**
 
-BeFit is a static single-page app you can host on GitHub Pages. Every visitor gets onboarded with their own information, follows the same 6-month beginner-friendly program structure, and tracks their own streak — all in their browser's `localStorage`. No backend. No accounts. No data leaves your device.
+BeFit is a privacy-first fitness logbook that helps you build a lasting exercise habit over 26 weeks. Everything runs entirely in your browser using `localStorage`—no accounts, no servers, and no data collection.
 
 ---
 
 ## What it is
 
-A 6-month, 20–30 minutes-a-day training logbook built on three ideas:
+A beginner-friendly 6-month fitness program built around three simple principles:
 
 | Layer | What it measures |
 |---|---|
-| **Consistency** (foundation) | ≥6 sessions/week, 24 of 26 weeks |
-| **Endurance** (engine) | Monthly 2 km timed run vs baseline |
-| **Body** (long game) | Waist tape + weight trend |
+| **Consistency** | Complete at least 6 sessions each week for 24 of 26 weeks |
+| **Endurance** | Monthly 2 km timed run compared with your starting baseline |
+| **Body** | Long-term weight and waist measurements |
 
-The fixed weekly schedule (Mon–Sat sessions, Sunday rest) means you never have to decide what to do — you just look it up. Three moderate diet rules replace calorie counting. A streak that measures showing up, not heroics.
+Instead of deciding what to do every day, simply open the app and follow today's session. The focus is on consistency rather than perfection.
 
-### Pages / tabs
+---
+
+## Features
+
+- 📅 Daily workout schedule (Monday–Saturday)
+- ✅ One-tap workout logging
+- 🔥 Consistency streak tracker
+- 📊 Weight, waist, and 2 km run progress charts
+- 📝 Weekly review journal
+- 💡 Personalized guidance based on your own data
+- 🍽️ Simple nutrition principles (no calorie counting)
+- 💾 Export and import your data
+- 🔒 100% offline & privacy-first
+
+---
+
+## Pages
 
 | Tab | Purpose |
 |---|---|
-| **Today** | Today's session + one-tap logging |
-| **Streak** | Calendar history + weekly quota bars + the two laws |
-| **Log** | 2-minute Sunday review form + running table |
-| **Progress** | SVG charts for weight, waist, and 2 km run vs baseline |
-| **Guidance** | Rule-based suggestions from your own data |
-| **Plan** | Full week table, exercises, diet rules, meal-prep reference |
-| **Safety** | 5 safety lines + medical disclaimer |
-| **Profile** | Edit info, export/import JSON backup, clear data |
+| **Today** | View today's workout and log completion |
+| **Streak** | Calendar, weekly targets, and consistency tracking |
+| **Log** | Weekly review and workout history |
+| **Progress** | Charts for weight, waist, and running performance |
+| **Guidance** | Suggestions generated from your own data |
+| **Plan** | Weekly schedule, exercise list, and nutrition guidelines |
+| **Safety** | Exercise safety reminders and disclaimer |
+| **Profile** | Personal information, backup, restore, and reset |
 
-### localStorage schema
+---
 
+## Data Storage
+
+All information is stored only in your browser using `localStorage`.
+
+```text
+befit.profile
+befit.days
+befit.weeks
+befit.monthly
 ```
+
+### Schema
+
+```javascript
 befit.profile  { name, startDate, weightKg, waistCm, run2kMin, maxPushups, timeSlot }
 befit.days     { "YYYY-MM-DD": "done" | "short" | "rest" | "sick" | "missed" }
 befit.weeks    [ { weekEnding, sessions, weightKg, P, S, T, note } ]
 befit.monthly  [ { date, waistCm, run2kMin } ]
 ```
 
----
-
-## Running locally
-
-```bash
-# Python (built in)
-cd site
-python3 -m http.server 8080
-# → http://localhost:8080
-
-# Or Node (if installed)
-npx serve .
-```
+No accounts are required, no analytics are used, and your data never leaves your device.
 
 ---
 
-## Hosting on GitHub Pages
+## Project Structure
 
-### 1. Create the git repo (already done for you)
-
-```bash
-cd ~/Desktop/befit/site
-git init
-git add -A
-git commit -m "feat: BeFit v1 — 26-week consistency logbook"
-```
-
-### 2. Create a public GitHub repo
-
-Go to [github.com/new](https://github.com/new), name it `befit` (or anything you like), set it to **Public**, and **do not** initialize with a README (you already have one).
-
-### 3. Push
-
-```bash
-git remote add origin https://github.com/YOUR-USERNAME/befit.git
-git branch -M main
-git push -u origin main
-```
-
-### 4. Enable GitHub Pages
-
-1. Go to your repo → **Settings** → **Pages**
-2. Under **Source**, choose **Deploy from a branch**
-3. Branch: `main`, folder: `/ (root)`
-4. Click **Save**
-
-Your site will be live at:
-
-```
-https://YOUR-USERNAME.github.io/befit/
-```
-
-It usually takes 1–2 minutes for Pages to build the first time.
-
-### Privacy guarantee
-
-Each visitor's data is stored only in **their own browser's `localStorage`**. One public URL works for unlimited users — their data never meets yours, and nothing reaches any server.
-
----
-
-## Forking / customizing
-
-The entire program is in three files:
-
-| File | What to change |
+| File | Purpose |
 |---|---|
-| `app.js` | `SESSIONS` array (exercise details), `PRINCIPLES`, `MRBFIT` links, `PROGRAM_WEEKS`, `WEEKS_TARGET` |
-| `styles.css` | CSS custom properties at `:root` for colors, fonts, shadows |
-| `index.html` | Page title, nav tab labels, footer text |
+| `index.html` | Application layout |
+| `styles.css` | Theme and styling |
+| `app.js` | Workout schedule, tracking, charts, and program logic |
 
-No build step, no dependencies, no node_modules. Edit, save, push.
+No frameworks, build tools, or external dependencies.
+
+---
+
+## Customization
+
+You can easily customize the app:
+
+| File | Change |
+|---|---|
+| `app.js` | Workout plan, program length, guidance rules, references |
+| `styles.css` | Colors, typography, spacing, shadows |
+| `index.html` | Title, navigation labels, footer, branding |
+
+---
+
+## Privacy
+
+BeFit is designed to be completely private.
+
+- No accounts
+- No backend
+- No cloud database
+- No tracking
+- No analytics
+- No personal data leaves your device
+
+Each visitor has their own independent data stored in their own browser. Nothing is shared between users.
 
 ---
 
 ## Disclaimer
 
-This is a consistency plan for healthy adults cleared for moderate exercise. It is **not medical advice**. Sharp pain means stop; anything medical — conditions, medications, injuries, rapid weight change — is a doctor's call, not a website's. Your data never leaves your browser.
+BeFit is intended for healthy adults who are cleared for moderate exercise. It is **not medical advice**. Stop exercising if you experience sharp pain, and consult a healthcare professional regarding injuries, medical conditions, medications, or significant weight changes.
 
 ---
 
-*Meal-prep reference: [Mr. B-fit on YouTube](https://www.youtube.com/channel/UCjeDdgwverf8ZgMAaqY8F3Q)*
+**Meal-prep reference:** https://www.youtube.com/channel/UCjeDdgwverf8ZgMAaqY8F3Q
